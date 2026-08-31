@@ -13,7 +13,22 @@
             <button type="submit" id="search_button">Search</button>
             <button type="button" id="add_recipe_btn">New Recipe</button>
             <dialog id="add_recipe_modal">
-                <h2>Recipe added!</h2>
+                <form action="" id="add_recipe_form">
+                    <label for="recipe-name">Name:</label>
+                    <input type="text" name="recipe-name" id="recipe_name">
+                    <label for="recipe-prep-time">Prep Time:</label>
+                    <input type="text" name="recipe-prep-time" id="recipe_prep_time">
+                    <label for="recipe-cook-time">Cook Time:</label>
+                    <input type="text" name="recipe-cook-time" id="recipe_cook_time">
+                    <label for="recipe-servings">Servings:</label>
+                    <input type="text" name="recipe-servings" id="recipe_servings">
+                    <label for="recipe-preparation">Preparation</label>
+                    <textarea name="recipe-preparation" id="recipe_preparation"></textarea>
+                    <label for="recipe-ingredients">Ingredients</label>
+                    <textarea name="recipe-ingredients" id="recipe_ingredients"></textarea>
+                    <button type="button" id="add_recipe_modal_cancel_btn">Cancel</button>
+                    <button type="submit" id="add_recipe_modal_submit_btn">Save</button>
+                </form>
             </dialog>
         <script src="script.js"></script>
     </main>
