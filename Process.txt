@@ -1,0 +1,7 @@
+SEARCH BAR:
+1. Grab search bar for inputted value.
+2. Grab saved data from local storage.
+3. Parse saved data into js obj.
+4. Compare inputted value to saved data.
+5. Filter recipes.
+6. Render recipes.
