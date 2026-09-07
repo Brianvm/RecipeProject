@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Grandma's Kitchen</title>
 </head>
 <body>
     <main>
-            <h1>My Family Recipes</h1>
+            <h1>Grandma's Kitchen</h1>
             <input type="search" name="query" id="search_bar" placeholder="Which recipe are you looking for?">
             <button type="submit" id="search_button">Search</button>
             <button type="button" id="add_recipe_btn">New Recipe</button>
+            <section class="hidden" id="search_results_container"></section>
             <dialog id="add_recipe_modal">
                 <form action="" id="add_recipe_form">
                     <label for="recipe-name">Name:</label>

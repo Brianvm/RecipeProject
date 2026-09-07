@@ -5,6 +5,8 @@ const addRecipeModalCancelBtn = document.getElementById('add_recipe_modal_cancel
 const searchBar = document.getElementById('search_bar');
 const searchBtn = document.getElementById('search_button');
 const dataBase = JSON.parse(localStorage.getItem('dataBase')) || [];
+const searchResultsConatiner = document.getElementById('search_results_container');
+console.log(dataBase);
 
 /* SEARCH BAR */
 searchBtn.addEventListener('click', handleSearchQuery);
@@ -13,7 +15,7 @@ searchBtn.addEventListener('click', handleSearchQuery);
 /* ADD RECIPE MODAL */
 addRecipeBtn.addEventListener('click', handleAddRecipeModal);
 addRecipeForm.addEventListener('submit', handleAddRecipeFormDataSubmit);
-addRecipeModalCancelBtn.addEventListener('click', handleAddRecipeModalCancelBtn)
+addRecipeModalCancelBtn.addEventListener('click', handleAddRecipeModalCancelBtn);
 
 
 /* FUNCTIONS */
@@ -38,8 +40,17 @@ function handleAddRecipeFormDataSubmit(e) {
 
 function handleSearchQuery() {
     const query = searchBar.value.toLowerCase();
+    searchResultsConatiner.classList.remove('hidden');
 
     const matchingRecipes = dataBase.filter(recipe => recipe['recipe-name'].toLowerCase().includes(query) || recipe['recipe-ingredients'].toLowerCase().includes(query))
 
-    console.log(matchingRecipes);
+    searchBar.value = '';
+    searchResultsConatiner.innerHTML = '';
+    matchingRecipes.forEach(recipe => {
+        searchResultsConatiner.innerHTML += `
+        <article class="recipe_wrapper">
+            <h2 class="recipe_title">${recipe['recipe-name']}</h2>
+            <p>${recipe['recipe-ingredients']}</p>
+        </article>`;
+    });
 }
