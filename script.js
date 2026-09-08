@@ -6,11 +6,12 @@ const searchBar = document.getElementById('search_bar');
 const searchBtn = document.getElementById('search_button');
 const dataBase = JSON.parse(localStorage.getItem('dataBase')) || [];
 const searchResultsConatiner = document.getElementById('search_results_container');
+const clickedRecipeModal = document.getElementById('clicked_recipe_modal');
 console.log(dataBase);
 
 /* SEARCH BAR */
 searchBtn.addEventListener('click', handleSearchQuery);
-
+searchResultsConatiner.addEventListener('click', handleResultClick);
 
 /* ADD RECIPE MODAL */
 addRecipeBtn.addEventListener('click', handleAddRecipeModal);
@@ -32,6 +33,7 @@ function handleAddRecipeFormDataSubmit(e) {
 
     const formData = new FormData(addRecipeForm);
     const recipeData = Object.fromEntries(formData);
+    recipeData.id = dataBase.length + 1;
     dataBase.push(recipeData);
     localStorage.setItem('dataBase', JSON.stringify(dataBase));
     addRecipeForm.reset();
@@ -46,11 +48,27 @@ function handleSearchQuery() {
 
     searchBar.value = '';
     searchResultsConatiner.innerHTML = '';
+    
     matchingRecipes.forEach(recipe => {
+        const regex = new RegExp(`(${query})`, 'gi');
+        const highLightedName = recipe['recipe-name'].replace(regex, `<span class='highlighted'>$1</span>`);
+        const highLightedIngredients = recipe['recipe-ingredients'].replace(regex, `<span class='highlighted'>$1</span>`);
         searchResultsConatiner.innerHTML += `
-        <article class="recipe_wrapper">
-            <h2 class="recipe_title">${recipe['recipe-name']}</h2>
-            <p>${recipe['recipe-ingredients']}</p>
-        </article>`;
+        <button class="recipe_wrapper" data-id="${recipe.id}">
+            <article>
+                <h2 class="recipe_title">${highLightedName}</h2>
+                <p>${highLightedIngredients}</p>
+            </article>
+        </button>`;
     });
+}
+
+function handleResultClick(e) {
+    const clickedResult = e.target.closest('.recipe_wrapper');
+    if(!clickedResult) return;
+
+    const recipeId = Number(clickedResult.dataset.id);
+    const selectedRecipe = dataBase.find(recipe => recipe.id === recipeId);
+
+    clickedRecipeModal.showModal();
 }
