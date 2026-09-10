@@ -18,10 +18,10 @@ addRecipeBtn.addEventListener('click', handleAddRecipeModal);
 addRecipeForm.addEventListener('submit', handleAddRecipeFormDataSubmit);
 addRecipeModalCancelBtn.addEventListener('click', handleAddRecipeModalCancelBtn);
 
-
 /* FUNCTIONS */
 function handleAddRecipeModal() {
-    addRecipeModal.showModal() 
+    addRecipeModal.showModal();
+    searchResultsConatiner.innerHTML = '';
 }
 
 function handleAddRecipeModalCancelBtn() {
@@ -30,7 +30,7 @@ function handleAddRecipeModalCancelBtn() {
 
 function handleAddRecipeFormDataSubmit(e) {
     e.preventDefault();
-
+    
     const formData = new FormData(addRecipeForm);
     const recipeData = Object.fromEntries(formData);
     recipeData.id = dataBase.length + 1;
@@ -43,9 +43,9 @@ function handleAddRecipeFormDataSubmit(e) {
 function handleSearchQuery() {
     const query = searchBar.value.toLowerCase();
     searchResultsConatiner.classList.remove('hidden');
-
+    
     const matchingRecipes = dataBase.filter(recipe => recipe['recipe-name'].toLowerCase().includes(query) || recipe['recipe-ingredients'].toLowerCase().includes(query))
-
+    
     searchBar.value = '';
     searchResultsConatiner.innerHTML = '';
     
@@ -56,19 +56,33 @@ function handleSearchQuery() {
         searchResultsConatiner.innerHTML += `
         <button class="recipe_wrapper" data-id="${recipe.id}">
             <article>
-                <h2 class="recipe_title">${highLightedName}</h2>
-                <p>${highLightedIngredients}</p>
+            <h2 class="recipe_title">${highLightedName}</h2>
+            <p>${highLightedIngredients}</p>
             </article>
-        </button>`;
-    });
-}
+            </button>`;
+        });
+    }
+    
+    /* SEARCHED RECIPE */
+    function handleResultClick(e) {
+        const clickedResult = e.target.closest('.recipe_wrapper');
+        if(!clickedResult) return;
 
-function handleResultClick(e) {
-    const clickedResult = e.target.closest('.recipe_wrapper');
-    if(!clickedResult) return;
+        const recipeId = Number(clickedResult.dataset.id);
+        const selectedRecipe = dataBase.find(recipe => recipe.id === recipeId);
+        console.log(selectedRecipe);
+        
+        clickedRecipeModal.showModal();
 
-    const recipeId = Number(clickedResult.dataset.id);
-    const selectedRecipe = dataBase.find(recipe => recipe.id === recipeId);
-
-    clickedRecipeModal.showModal();
-}
+        clickedRecipeModal.innerHTML = `
+        <article id="recipe_card_wrapper">
+            <h2 id="recipe_card_name">${selectedRecipe['recipe-name']}</h2>
+            <h3 id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']}</span></h3>
+            <h3 id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']}</span></h3>
+            <h3 id="recipe_card_servings">Servings: <span class="recipe_card_num_value">${selectedRecipe['recipe-servings']}</span></h3>
+            <h3 class="recipe_card_subtitle">Preparation:</h3>
+            <p id="recipe_prep_text">${selectedRecipe['recipe-preparation']}</p>
+            <h3 class="recipe_card_subtitle">Ingredients:</h3>
+        </article>
+        `
+    }
