@@ -70,10 +70,7 @@ function handleSearchQuery() {
 
         const recipeId = Number(clickedResult.dataset.id);
         const selectedRecipe = dataBase.find(recipe => recipe.id === recipeId);
-        console.log(selectedRecipe);
-        const ingredientsArr = selectedRecipe['recipe-ingredients'].split(', ');
-        console.log(ingredientsArr);
-        // ITERATE THROUGH INGREDIENTS ARRAY AND MAKE EACH ITEM AN UNORDERED LIST ITEM!
+        const ingredientItems = selectedRecipe['recipe-ingredients'].split(', ').map(ingredient => `<li class="ingredient">${ingredient}</li>`).join('');
         
         clickedRecipeModal.showModal();
 
@@ -86,6 +83,7 @@ function handleSearchQuery() {
             <h3 class="recipe_card_subtitle">Preparation:</h3>
             <p id="recipe_prep_text">${selectedRecipe['recipe-preparation']}</p>
             <h3 class="recipe_card_subtitle">Ingredients:</h3>
+            <ul id="ingredients_list">${ingredientItems}</ul>
         </article>
         `
     }
