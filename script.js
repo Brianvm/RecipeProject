@@ -73,14 +73,15 @@ function handleSearchQuery() {
         console.log(selectedRecipe);
         const ingredientsArr = selectedRecipe['recipe-ingredients'].split(', ');
         console.log(ingredientsArr);
+        // ITERATE THROUGH INGREDIENTS ARRAY AND MAKE EACH ITEM AN UNORDERED LIST ITEM!
         
         clickedRecipeModal.showModal();
 
         clickedRecipeModal.innerHTML = `
         <article id="recipe_card_wrapper">
             <h2 id="recipe_card_name">${selectedRecipe['recipe-name']}</h2>
-            <h3 id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']}</span></h3>
-            <h3 id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']}</span></h3>
+            <h3 id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']}</span> min</h3>
+            <h3 id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']}</span> min</h3>
             <h3 id="recipe_card_servings">Servings: <span class="recipe_card_num_value">${selectedRecipe['recipe-servings']}</span></h3>
             <h3 class="recipe_card_subtitle">Preparation:</h3>
             <p id="recipe_prep_text">${selectedRecipe['recipe-preparation']}</p>
