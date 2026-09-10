@@ -71,6 +71,8 @@ function handleSearchQuery() {
         const recipeId = Number(clickedResult.dataset.id);
         const selectedRecipe = dataBase.find(recipe => recipe.id === recipeId);
         console.log(selectedRecipe);
+        const ingredientsArr = selectedRecipe['recipe-ingredients'].split(', ');
+        console.log(ingredientsArr);
         
         clickedRecipeModal.showModal();
 
