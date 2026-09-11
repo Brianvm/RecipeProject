@@ -73,21 +73,22 @@ function handleResultClick(e) {
     const selectedRecipe = dataBase.find(recipe => recipe.id === recipeId);
     const ingredientItems = selectedRecipe['recipe-ingredients'].split(', ').map(ingredient => `<li class="ingredient">${ingredient}</li>`).join('');
     
-    clickedRecipeModal.showModal();
     
     clickedRecipeModal.innerHTML = `
     <article id="recipe_card_wrapper">
-        <h2 id="recipe_card_name">${selectedRecipe['recipe-name']}</h2>
-        <h3 id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']}</span> min</h3>
-        <h3 id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']}</span> min</h3>
-        <h3 id="recipe_card_servings">Servings: <span class="recipe_card_num_value">${selectedRecipe['recipe-servings']}</span></h3>
-        <h3 class="recipe_card_subtitle">Preparation:</h3>
-        <p id="recipe_prep_text">${selectedRecipe['recipe-preparation']}</p>
-        <h3 class="recipe_card_subtitle">Ingredients:</h3>
-        <ul id="ingredients_list">${ingredientItems}</ul>
-        <button type="button" id="close_btn">X</button>
+    <h2 id="recipe_card_name">${selectedRecipe['recipe-name']}</h2>
+    <h3 id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']}</span> min</h3>
+    <h3 id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']}</span> min</h3>
+    <h3 id="recipe_card_servings">Servings: <span class="recipe_card_num_value">${selectedRecipe['recipe-servings']}</span></h3>
+    <h3 class="recipe_card_subtitle">Preparation:</h3>
+    <p id="recipe_prep_text">${selectedRecipe['recipe-preparation']}</p>
+    <h3 class="recipe_card_subtitle">Ingredients:</h3>
+    <ul id="ingredients_list">${ingredientItems}</ul>
+    <button type="button" id="close_btn">X</button>
+    <button type="button" id="recipe_del_btn">DELETE</button>
     </article>
-            `
-            const closeBtn = clickedRecipeModal.querySelector('#close_btn');
-            closeBtn.addEventListener('click', () => clickedRecipeModal.close());
-        }
+    `
+    clickedRecipeModal.showModal();
+        clickedRecipeModal.querySelector('#close_btn').addEventListener('click', () => clickedRecipeModal.close());
+        clickedRecipeModal.querySelector('#recipe_del_btn').addEventListener('click', () => handleDelRecipe(recipeId));
+}
