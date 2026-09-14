@@ -95,4 +95,8 @@ function handleResultClick(e) {
 
     /* DEL FUNCTION */
     function handleDelRecipe(recipeId) {
+        const delRecipeIndex = dataBase.findIndex(recipe => recipe.id === recipeId)
+        dataBase.splice(delRecipeIndex, 1);
+        localStorage.setItem('dataBase', JSON.stringify(dataBase));
+        
     }
