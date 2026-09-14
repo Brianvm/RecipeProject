@@ -34,7 +34,7 @@ function handleAddRecipeFormDataSubmit(e) {
     
     const formData = new FormData(addRecipeForm);
     const recipeData = Object.fromEntries(formData);
-    recipeData.id = dataBase.length + 1;
+    recipeData.id = crypto.randomUUID();
     dataBase.push(recipeData);
     localStorage.setItem('dataBase', JSON.stringify(dataBase));
     addRecipeForm.reset();
@@ -69,7 +69,7 @@ function handleResultClick(e) {
     const clickedResult = e.target.closest('.recipe_wrapper');
     if(!clickedResult) return;
 
-    const recipeId = Number(clickedResult.dataset.id);
+    const recipeId = clickedResult.dataset.id;
     const selectedRecipe = dataBase.find(recipe => recipe.id === recipeId);
     const ingredientItems = selectedRecipe['recipe-ingredients'].split(', ').map(ingredient => `<li class="ingredient">${ingredient}</li>`).join('');
     
@@ -91,4 +91,8 @@ function handleResultClick(e) {
     clickedRecipeModal.showModal();
         clickedRecipeModal.querySelector('#close_btn').addEventListener('click', () => clickedRecipeModal.close());
         clickedRecipeModal.querySelector('#recipe_del_btn').addEventListener('click', () => handleDelRecipe(recipeId));
-}
+    }
+
+    /* DEL FUNCTION */
+    function handleDelRecipe(recipeId) {
+    }
