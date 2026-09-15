@@ -42,12 +42,19 @@ function handleAddRecipeFormDataSubmit(e) {
 }
 
 function handleSearchQuery() {
-    const query = searchBar.value.toLowerCase();
-    searchResultsConatiner.classList.remove('hidden');
-    
+    if(searchBar.value.trim() !== ''){
+        const query = searchBar.value.toLowerCase();
+        searchResultsConatiner.classList.remove('hidden');
+        searchResultsConatiner.dataset.activeQuery = query;
+        searchBar.value = '';
+        renderSearchResults(query);
+    }
+}
+
+/* RENDER SEARCH RESULTS */
+function renderSearchResults(query) {
     const matchingRecipes = dataBase.filter(recipe => recipe['recipe-name'].toLowerCase().includes(query) || recipe['recipe-ingredients'].toLowerCase().includes(query))
     
-    searchBar.value = '';
     searchResultsConatiner.innerHTML = '';
     
     matchingRecipes.forEach(recipe => {
@@ -62,6 +69,7 @@ function handleSearchQuery() {
         </article>
         </button>`;
     });
+    
 }
 
 /* SEARCHED RECIPE */
@@ -98,5 +106,7 @@ function handleResultClick(e) {
         const delRecipeIndex = dataBase.findIndex(recipe => recipe.id === recipeId)
         dataBase.splice(delRecipeIndex, 1);
         localStorage.setItem('dataBase', JSON.stringify(dataBase));
-        
+        const query = searchResultsConatiner.dataset.activeQuery || '';
+        renderSearchResults(query);
+        clickedRecipeModal.close();
     }
