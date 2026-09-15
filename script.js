@@ -21,6 +21,7 @@ addRecipeModalCancelBtn.addEventListener('click', handleCloseBtn);
 
 /* FUNCTIONS */
 function handleAddRecipeModal() {
+    delete addRecipeForm.dataset.editingId;
     addRecipeModal.showModal();
     searchResultsConatiner.innerHTML = '';
 }
@@ -34,11 +35,23 @@ function handleAddRecipeFormDataSubmit(e) {
     
     const formData = new FormData(addRecipeForm);
     const recipeData = Object.fromEntries(formData);
-    recipeData.id = crypto.randomUUID();
-    dataBase.push(recipeData);
+    const editingId = addRecipeForm.dataset.editingId;
+    if(!editingId) {
+        recipeData.id = crypto.randomUUID();
+        dataBase.push(recipeData);
+    } else {
+        recipeData.id = editingId;
+        const recipeIndex = dataBase.findIndex(recipe => recipe.id === editingId);
+        dataBase[recipeIndex] = recipeData;
+        delete addRecipeForm.dataset.editingId;
+    }
+
     localStorage.setItem('dataBase', JSON.stringify(dataBase));
     addRecipeForm.reset();
     addRecipeModal.close();
+
+    const query = searchResultsConatiner.dataset.activeQuery || '';
+        renderSearchResults(query); 
 }
 
 function handleSearchQuery() {
@@ -93,15 +106,31 @@ function handleResultClick(e) {
     <h3 class="recipe_card_subtitle">Ingredients:</h3>
     <ul id="ingredients_list">${ingredientItems}</ul>
     <button type="button" id="close_btn">X</button>
+    <button type="button" id="recipe_update_btn">Update</button>
     <button type="button" id="recipe_del_btn">DELETE</button>
     </article>
     `
     clickedRecipeModal.showModal();
-        clickedRecipeModal.querySelector('#close_btn').addEventListener('click', () => clickedRecipeModal.close());
-        clickedRecipeModal.querySelector('#recipe_del_btn').addEventListener('click', () => handleDelRecipe(recipeId));
+    clickedRecipeModal.querySelector('#close_btn').addEventListener('click', () => clickedRecipeModal.close());
+    clickedRecipeModal.querySelector('#recipe_update_btn').addEventListener('click', () =>handleRecipeUpdate(recipeId));
+    clickedRecipeModal.querySelector('#recipe_del_btn').addEventListener('click', () => handleDelRecipe(recipeId));
     }
 
-    /* DEL FUNCTION */
+    /* RECIPE UPDATE FUNCTION */
+    function handleRecipeUpdate(recipeId) {
+        const selectedRecipe = dataBase.find(recipe => recipe.id === recipeId);
+        Object.entries(selectedRecipe).forEach(([key, value]) => {
+            if(addRecipeForm.elements[key]) {
+                addRecipeForm.elements[key].value = value;
+            }
+        })
+        addRecipeForm.dataset.editingId = recipeId;
+        clickedRecipeModal.close();
+        addRecipeModal.showModal();
+
+    }
+
+    /* RECIPE DEL FUNCTION */
     function handleDelRecipe(recipeId) {
         const delRecipeIndex = dataBase.findIndex(recipe => recipe.id === recipeId)
         dataBase.splice(delRecipeIndex, 1);
@@ -110,3 +139,4 @@ function handleResultClick(e) {
         renderSearchResults(query);
         clickedRecipeModal.close();
     }
+
