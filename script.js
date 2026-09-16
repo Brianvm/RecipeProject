@@ -68,18 +68,19 @@ function renderSearchResults(query) {
     
     searchResultsConatiner.innerHTML = '';
     
-    matchingRecipes.forEach(recipe => {
-        const regex = new RegExp(`(${query})`, 'gi');
+    const regex = new RegExp(`(${query})`, 'gi');
+    
+    const recipesToRender = matchingRecipes.map(recipe => {
         const highLightedName = recipe['recipe-name'].replace(regex, `<span class='highlighted'>$1</span>`);
         const highLightedIngredients = recipe['recipe-ingredients'].replace(regex, `<span class='highlighted'>$1</span>`);
-        searchResultsConatiner.innerHTML += `
-        <button class="recipe_wrapper" data-id="${recipe.id}">
+        return `<button class="recipe_wrapper" data-id="${recipe.id}">
         <article>
         <h2 class="recipe_title">${highLightedName}</h2>
         <p>${highLightedIngredients}</p>
         </article>
-        </button>`;
-    });
+        </button>`
+    }).join('');
+    searchResultsConatiner.innerHTML = recipesToRender;  
     
 }
 
