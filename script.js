@@ -1,23 +1,21 @@
 const addRecipeBtn = document.getElementById('add_recipe_btn');
 const addRecipeModal = document.getElementById('add_recipe_modal');
 const addRecipeForm = document.getElementById('add_recipe_form');
-const addRecipeModalCancelBtn = document.getElementById('add_recipe_modal_cancel_btn');
+const addRecipeModalCloseBtn = document.getElementById('add_recipe_modal_close_btn');
 const searchBar = document.getElementById('search_bar');
 const searchBtn = document.getElementById('search_button');
-const dataBase = JSON.parse(localStorage.getItem('dataBase')) || [];
 const searchResultsConatiner = document.getElementById('search_results_container');
 const clickedRecipeModal = document.getElementById('clicked_recipe_modal');
-console.log(dataBase);
-
-/* SEARCH BAR */
-searchBtn.addEventListener('click', handleSearchQuery);
-searchResultsConatiner.addEventListener('click', handleResultClick);
+const dataBase = JSON.parse(localStorage.getItem('dataBase')) || [];
 
 /* ADD RECIPE MODAL */
 addRecipeBtn.addEventListener('click', handleAddRecipeModal);
 addRecipeForm.addEventListener('submit', handleAddRecipeFormDataSubmit);
-addRecipeModalCancelBtn.addEventListener('click', handleCloseBtn);
+addRecipeModalCloseBtn.addEventListener('click', handleCloseBtn);
 
+/* SEARCH BAR */
+searchBtn.addEventListener('click', handleSearchQuery);
+searchResultsConatiner.addEventListener('click', handleResultClick);
 
 /* FUNCTIONS */
 function handleAddRecipeModal() {
@@ -112,7 +110,7 @@ function handleResultClick(e) {
     `
     clickedRecipeModal.showModal();
     clickedRecipeModal.querySelector('#close_btn').addEventListener('click', () => clickedRecipeModal.close());
-    clickedRecipeModal.querySelector('#recipe_update_btn').addEventListener('click', () =>handleRecipeUpdate(recipeId));
+    clickedRecipeModal.querySelector('#recipe_update_btn').addEventListener('click', () => handleRecipeUpdate(recipeId));
     clickedRecipeModal.querySelector('#recipe_del_btn').addEventListener('click', () => handleDelRecipe(recipeId));
     }
 
