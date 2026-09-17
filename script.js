@@ -4,7 +4,7 @@ const addRecipeForm = document.getElementById('add_recipe_form');
 const addRecipeModalCloseBtn = document.getElementById('add_recipe_modal_close_btn');
 const searchBar = document.getElementById('search_bar');
 const searchBtn = document.getElementById('search_button');
-const searchResultsConatiner = document.getElementById('search_results_container');
+const searchResultsContainer = document.getElementById('search_results_container');
 const clickedRecipeModal = document.getElementById('clicked_recipe_modal');
 const dataBase = JSON.parse(localStorage.getItem('dataBase')) || [];
 
@@ -15,13 +15,13 @@ addRecipeModalCloseBtn.addEventListener('click', handleCloseBtn);
 
 /* SEARCH BAR */
 searchBtn.addEventListener('click', handleSearchQuery);
-searchResultsConatiner.addEventListener('click', handleResultClick);
+searchResultsContainer.addEventListener('click', handleResultClick);
 
 /* FUNCTIONS */
 function handleAddRecipeModal() {
     delete addRecipeForm.dataset.editingId;
     addRecipeModal.showModal();
-    searchResultsConatiner.innerHTML = '';
+    searchResultsContainer.innerHTML = '';
 }
 
 function handleCloseBtn() {
@@ -48,15 +48,15 @@ function handleAddRecipeFormDataSubmit(e) {
     addRecipeForm.reset();
     addRecipeModal.close();
 
-    const query = searchResultsConatiner.dataset.activeQuery || '';
+    const query = searchResultsContainer.dataset.activeQuery || '';
         renderSearchResults(query); 
 }
 
 function handleSearchQuery() {
     if(searchBar.value.trim() !== ''){
         const query = searchBar.value.toLowerCase();
-        searchResultsConatiner.classList.remove('hidden');
-        searchResultsConatiner.dataset.activeQuery = query;
+        searchResultsContainer.classList.remove('hidden');
+        searchResultsContainer.dataset.activeQuery = query;
         searchBar.value = '';
         renderSearchResults(query);
     }
@@ -66,7 +66,7 @@ function handleSearchQuery() {
 function renderSearchResults(query) {
     const matchingRecipes = dataBase.filter(recipe => recipe['recipe-name'].toLowerCase().includes(query) || recipe['recipe-ingredients'].toLowerCase().includes(query))
     
-    searchResultsConatiner.innerHTML = '';
+    searchResultsContainer.innerHTML = '';
     
     const regex = new RegExp(`(${query})`, 'gi');
     
@@ -80,7 +80,7 @@ function renderSearchResults(query) {
         </article>
         </button>`
     }).join('');
-    searchResultsConatiner.innerHTML = recipesToRender;  
+    searchResultsContainer.innerHTML = recipesToRender;  
     
 }
 
@@ -141,7 +141,7 @@ function handleResultClick(e) {
         const delRecipeIndex = dataBase.findIndex(recipe => recipe.id === recipeId)
         dataBase.splice(delRecipeIndex, 1);
         localStorage.setItem('dataBase', JSON.stringify(dataBase));
-        const query = searchResultsConatiner.dataset.activeQuery || '';
+        const query = searchResultsContainer.dataset.activeQuery || '';
         renderSearchResults(query);
         clickedRecipeModal.close();
     }
