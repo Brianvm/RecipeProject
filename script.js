@@ -110,9 +110,16 @@ function handleResultClick(e) {
     </article>
     `
     clickedRecipeModal.showModal();
-    clickedRecipeModal.querySelector('#close_btn').addEventListener('click', () => clickedRecipeModal.close());
-    clickedRecipeModal.querySelector('#recipe_update_btn').addEventListener('click', () => handleRecipeUpdate(recipeId));
-    clickedRecipeModal.querySelector('#recipe_del_btn').addEventListener('click', () => handleDelRecipe(recipeId));
+
+    clickedRecipeModal.addEventListener('click', (e) => {
+        if (e.target.id === 'close_btn') {
+            clickedRecipeModal.close();
+        } else if (e.target.id === 'recipe_update_btn') {
+            handleRecipeUpdate(recipeId);  
+        } else if (e.target.id === 'recipe_del_btn') {
+            handleDelRecipe(recipeId);
+        }
+    })
     }
 
     /* RECIPE UPDATE FUNCTION */
@@ -138,4 +145,3 @@ function handleResultClick(e) {
         renderSearchResults(query);
         clickedRecipeModal.close();
     }
-
