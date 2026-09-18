@@ -54,9 +54,58 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+/* ELEMENT STYLES */
+
+body {
+  text-align: center;
+}
+
+h1 {
+  margin: 6rem 0 5rem 0;
+}
+
+main,
 #search_results_container {
   height: 100vh;
 }
+
+#searchbar_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#search_input_wrapper {
+  position: relative;
+  width: 40%;
+}
+
+#search_bar {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+}
+
+#search_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+#search_button svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+
 
 
 /* UTILITY */
@@ -66,4 +115,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .highlighted {
   background-color: yellow;
+}
+
+.red-border {
+  border: 2px solid red;
 }
