@@ -17,6 +17,23 @@ addRecipeModalCloseBtn.addEventListener('click', handleCloseBtn);
 searchBtn.addEventListener('click', handleSearchQuery);
 searchResultsContainer.addEventListener('click', handleResultClick);
 
+/* OPEN RECIPE CARD */
+clickedRecipeModal.addEventListener('click', (e) => {
+
+    const card = e.target.closest('#recipe_card_wrapper');
+    if (!card) return;
+
+    const recipeId = card.dataset.id;
+
+    if (e.target.id === 'close_btn') {
+        clickedRecipeModal.close();
+    } else if (e.target.id === 'recipe_update_btn') {
+        handleRecipeUpdate(recipeId);  
+    } else if (e.target.id === 'recipe_del_btn') {
+        handleDelRecipe(recipeId);
+    }
+})
+
 /* FUNCTIONS */
 function handleAddRecipeModal() {
     delete addRecipeForm.dataset.editingId;
@@ -95,7 +112,7 @@ function handleResultClick(e) {
     
     
     clickedRecipeModal.innerHTML = `
-    <article id="recipe_card_wrapper">
+    <article id="recipe_card_wrapper" data-id="${selectedRecipe.id}">
     <h2 id="recipe_card_name">${selectedRecipe['recipe-name']}</h2>
     <h3 id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']}</span> min</h3>
     <h3 id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']}</span> min</h3>
@@ -111,15 +128,6 @@ function handleResultClick(e) {
     `
     clickedRecipeModal.showModal();
 
-    clickedRecipeModal.addEventListener('click', (e) => {
-        if (e.target.id === 'close_btn') {
-            clickedRecipeModal.close();
-        } else if (e.target.id === 'recipe_update_btn') {
-            handleRecipeUpdate(recipeId);  
-        } else if (e.target.id === 'recipe_del_btn') {
-            handleDelRecipe(recipeId);
-        }
-    })
     }
 
     /* RECIPE UPDATE FUNCTION */
