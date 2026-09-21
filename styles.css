@@ -58,13 +58,78 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   text-align: center;
+  background-image: url('assets/jakob-owens-XKLZia7hPYI-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
-h1 {
-  margin: 6rem 0 4rem 0;
+#hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ANIMATED HEADER */
+.handwriting-header {
+  height: 7rem;
+  align-self: center;
+  font-family: "Special Elite", system-ui;
+  font-size: 3.5rem;
+  line-height: 6rem;
+  color: white;
+  margin: 0 0 3rem 0;
+  padding: 0;
+  display: inline-block;
+  white-space: nowrap;
+  text-align: left;
+  filter: drop-shadow(0 0 5px black);
+  width: max-content;
+
+  -webkit-mask-image: linear-gradient(to right, #000 50%, transparent 50%);
+  mask-image: linear-gradient(to right, #000 50%, transparent 50%);
+  
+  -webkit-mask-size: 200% 100%;
+  mask-size: 200% 100%;
+  
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+
+  animation: typewriter 2.5s linear forwards;
+}
+
+/* HORIZONTAL BASELINE CURSOR */
+.handwriting-header::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 4px;
+  background-color: white;
+  margin-left: 0.1em;
+  vertical-align: baseline;
+  
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes typewriter {
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 main,
+#hero,
 #search_results_container {
   height: 100vh;
 }
