@@ -71,7 +71,6 @@ body {
   justify-content: center;
 }
 
-/* ANIMATED HEADER */
 .handwriting-header {
   height: 7rem;
   align-self: center;
@@ -92,14 +91,13 @@ body {
   
   -webkit-mask-size: 200% 100%;
   mask-size: 200% 100%;
-  
+
   -webkit-mask-position: 100% 0;
   mask-position: 100% 0;
 
-  animation: typewriter 2.5s linear forwards;
+  animation: typewriter 2.5s steps(22, end) forwards;
 }
 
-/* HORIZONTAL BASELINE CURSOR */
 .handwriting-header::after {
   content: "";
   display: inline-block;
@@ -150,6 +148,18 @@ main,
 #search_bar {
   width: 100%;
   padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+  border-radius: 15px;
+}
+
+#search_bar,
+#search_bar::placeholder {
+  font-family: "Special Elite", system-ui;
+  font-size: 0.9rem;
+}
+
+#search_bar:focus {
+  outline: none;
+  border: 2.5px solid turquoise;
 }
 
 #search_button {
@@ -187,7 +197,15 @@ main,
   height: 100%;
 }
 
+#add_recipe_btn svg path{
+  stroke: #fff;
+  fill: none;
+  filter: drop-shadow(0 0 1px black);
+}
 
+#add_recipe_btn:active svg path {
+  stroke: turquoise;
+}
 
 
 /* UTILITY */
