@@ -69,6 +69,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .handwriting-header {
@@ -84,7 +85,7 @@ body {
   white-space: nowrap;
   text-align: left;
   filter: drop-shadow(0 0 5px black);
-  width: max-content;
+  width: 75%;
 
   -webkit-mask-image: linear-gradient(to right, #000 50%, transparent 50%);
   mask-image: linear-gradient(to right, #000 50%, transparent 50%);
@@ -133,6 +134,8 @@ main,
 }
 
 #searchbar_container {
+  width: 75%;
+  height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,20 +144,20 @@ main,
 
 #search_input_wrapper {
   position: relative;
-  width: 40%;
-  height: 100%;
+  width: 100%;
 }
 
 #search_bar {
   width: 100%;
-  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+  height: 100%;
+  padding: 1rem 2.5rem 1rem 0.5rem;
   border-radius: 15px;
 }
 
 #search_bar,
 #search_bar::placeholder {
   font-family: "Special Elite", system-ui;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 #search_bar:focus {
@@ -177,11 +180,11 @@ main,
 }
 
 #add_recipe_btn {
-  width: 2.75rem;
-  height: 2.75rem;
+  width: auto;
+  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   background: transparent;
   padding: 0;
   border: none;
@@ -189,7 +192,7 @@ main,
 
 #search_button svg {
   width: 1.6rem;
-  height: 1.6rem;
+  height: 100%;
 }
 
 #add_recipe_btn svg {
