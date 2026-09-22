@@ -56,40 +56,62 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ELEMENT STYLES */
 
+/* ELEMENT STYLES */
+
+:root {
+  --control-height: 4rem;
+  --control-radius: 15px;
+  --accent-color: turquoise;
+  --content-width: min(75%, 42rem);
+}
+
 body {
+  min-height: 100vh;
   text-align: center;
-  background-image: url('assets/jakob-owens-XKLZia7hPYI-unsplash.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url("assets/jakob-owens-XKLZia7hPYI-unsplash.jpg")
+    center / cover no-repeat;
+}
+
+main,
+#hero,
+#search_results_container {
   min-height: 100vh;
 }
 
 #hero {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .handwriting-header {
+  width: fit-content;
+  max-width: 100%;
   height: 7rem;
-  align-self: center;
+  margin-bottom: 3rem;
+  padding: 0;
+
+  color: #fff;
   font-family: "Special Elite", system-ui;
   font-size: 3.5rem;
   line-height: 6rem;
-  color: white;
-  margin: 0 0 3rem 0;
-  padding: 0;
-  display: inline-block;
-  white-space: nowrap;
   text-align: left;
-  filter: drop-shadow(0 0 5px black);
-  width: 75%;
+  white-space: nowrap;
 
-  -webkit-mask-image: linear-gradient(to right, #000 50%, transparent 50%);
-  mask-image: linear-gradient(to right, #000 50%, transparent 50%);
-  
+  filter: drop-shadow(0 0 5px black);
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 50%,
+    transparent 50%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 50%,
+    transparent 50%
+  );
+
   -webkit-mask-size: 200% 100%;
   mask-size: 200% 100%;
 
@@ -104,10 +126,11 @@ body {
   display: inline-block;
   width: 0.55em;
   height: 4px;
-  background-color: white;
   margin-left: 0.1em;
+
+  background-color: #fff;
   vertical-align: baseline;
-  
+
   animation: blink 0.75s step-end infinite;
 }
 
@@ -119,80 +142,91 @@ body {
 }
 
 @keyframes blink {
-  from, to {
+  from,
+  to {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
 }
 
-main,
-#hero,
-#search_results_container {
-  height: 100vh;
-}
-
 #searchbar_container {
-  width: 75%;
-  height: 4rem;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 0.5rem;
+
+  width: var(--content-width);
+  height: var(--control-height);
 }
 
 #search_input_wrapper {
   position: relative;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
 }
 
 #search_bar {
   width: 100%;
   height: 100%;
   padding: 1rem 2.5rem 1rem 0.5rem;
-  border-radius: 15px;
+
+  border: 2px solid transparent;
+  border-radius: var(--control-radius);
+
+  font: 1rem "Special Elite", system-ui;
 }
 
-#search_bar,
 #search_bar::placeholder {
-  font-family: "Special Elite", system-ui;
-  font-size: 1rem;
+  font: inherit;
 }
 
 #search_bar:focus {
   outline: none;
-  border: 2.5px solid turquoise;
+}
+
+#search_bar:focus-visible {
+  border-color: var(--accent-color);
 }
 
 #search_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
-  right: 0.5rem;
   top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
+  right: 0.5rem;
 
-#add_recipe_btn {
-  width: auto;
-  height: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  /* align-items: center; */
-  background: transparent;
+
+  width: 2rem;
+  height: 2rem;
   padding: 0;
+
+  background: transparent;
   border: none;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 #search_button svg {
   width: 1.6rem;
-  height: 100%;
+  height: 1.6rem;
+}
+
+#add_recipe_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--control-height);
+  height: var(--control-height);
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 #add_recipe_btn svg {
@@ -200,26 +234,23 @@ main,
   height: 100%;
 }
 
-#add_recipe_btn svg path{
-  stroke: #fff;
+#add_recipe_btn svg path {
   fill: none;
+  stroke: white;
   filter: drop-shadow(0 0 1px black);
 }
 
 #add_recipe_btn:active svg path {
-  stroke: turquoise;
+  stroke: var(--accent-color);
 }
 
 
 /* UTILITY */
+
 .hidden {
   display: none;
 }
 
 .highlighted {
   background-color: yellow;
-}
-
-.red-border {
-  border: 2px solid red;
 }
