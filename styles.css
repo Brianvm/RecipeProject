@@ -96,7 +96,7 @@ main,
   max-width: 75%;
   height: 7rem;
   margin-bottom: 3rem;
-  padding: 0;
+  padding-right: 0.25rem;
 
   color: var(--white);
   font-family: var(--font-family);
@@ -105,7 +105,13 @@ main,
   text-align: left;
   white-space: nowrap;
 
-  filter: drop-shadow(0 0 5px black);
+  text-shadow:
+    1px 0 0 #000,
+    -1px 0 0 #000,
+    0 1px 0 #000,
+    0 -1px 0 #000,
+    0 0 4px rgba(0, 0, 0, 1),
+    0 0 10px rgba(0, 0, 0, 0.8);
 
   -webkit-mask-image: linear-gradient(
     to right,
@@ -136,6 +142,14 @@ main,
 
   background-color: var(--white);
   vertical-align: baseline;
+
+  filter:
+    drop-shadow(1px 0 0 #000)
+    drop-shadow(-1px 0 0 #000)
+    drop-shadow(0 1px 0 #000)
+    drop-shadow(0 -1px 0 #000)
+    drop-shadow(0 0 4px rgba(0, 0, 0, 1))
+    drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
 
   animation: blink 0.75s step-end infinite;
 }
@@ -180,7 +194,7 @@ main,
   height: 100%;
   padding: 1rem 2.5rem 1rem 0.5rem;
 
-  border: 2px solid transparent;
+  border: 2px solid var(--black);
   border-radius: var(--control-radius);
 
   font: 1rem var(--font-family);
