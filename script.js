@@ -6,6 +6,8 @@ const searchBar = document.getElementById('search_bar');
 const searchBtn = document.getElementById('search_button');
 const searchResultsContainer = document.getElementById('search_results_container');
 const clickedRecipeModal = document.getElementById('clicked_recipe_modal');
+const mainHeader = document.querySelector('.handwriting-header');
+const main = document.querySelector('main');
 const dataBase = JSON.parse(localStorage.getItem('dataBase')) || [];
 
 /* ADD RECIPE MODAL */
@@ -70,6 +72,9 @@ function handleAddRecipeFormDataSubmit(e) {
 }
 
 function handleSearchQuery() {
+    mainHeader.classList.add('hidden');
+    main.classList.add('results_state')
+
     if(searchBar.value.trim() !== ''){
         const query = searchBar.value.toLowerCase();
         searchResultsContainer.classList.remove('hidden');
@@ -90,10 +95,10 @@ function renderSearchResults(query) {
     const recipesToRender = matchingRecipes.map(recipe => {
         const highLightedName = recipe['recipe-name'].replace(regex, `<span class='highlighted'>$1</span>`);
         const highLightedIngredients = recipe['recipe-ingredients'].replace(regex, `<span class='highlighted'>$1</span>`);
-        return `<button class="recipe_wrapper" data-id="${recipe.id}">
+        return `<button class="search_result" data-id="${recipe.id}">
         <article>
-        <h2 class="recipe_title">${highLightedName}</h2>
-        <p>${highLightedIngredients}</p>
+        <h2 class="search_title">${highLightedName}</h2>
+        <p class="search_ingredients">${highLightedIngredients}</p>
         </article>
         </button>`
     }).join('');
@@ -103,7 +108,7 @@ function renderSearchResults(query) {
 
 /* SEARCHED RECIPE */
 function handleResultClick(e) {
-    const clickedResult = e.target.closest('.recipe_wrapper');
+    const clickedResult = e.target.closest('.search_result');
     if(!clickedResult) return;
 
     const recipeId = clickedResult.dataset.id;
