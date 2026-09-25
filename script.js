@@ -122,10 +122,14 @@ function handleResultClick(e) {
     <h3 id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']}</span> min</h3>
     <h3 id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']}</span> min</h3>
     <h3 id="recipe_card_servings">Servings: <span class="recipe_card_num_value">${selectedRecipe['recipe-servings']}</span></h3>
-    <h3 class="recipe_card_subtitle">Preparation:</h3>
-    <p id="recipe_prep_text">${selectedRecipe['recipe-preparation']}</p>
-    <h3 class="recipe_card_subtitle">Ingredients:</h3>
-    <ul id="ingredients_list">${ingredientItems}</ul>
+    <section id="prep_text">
+        <h3 class="recipe_card_subtitle">Preparation:</h3>
+        <p id="recipe_prep_text">${selectedRecipe['recipe-preparation']}</p>
+    </section>
+    <section id="ing_list">
+        <h3 class="recipe_card_subtitle">Ingredients:</h3>
+        <ul id="ingredients_list">${ingredientItems}</ul>
+    </section>
     <button type="button" id="close_btn">X</button>
     <button type="button" id="recipe_update_btn">Update</button>
     <button type="button" id="recipe_del_btn">DELETE</button>

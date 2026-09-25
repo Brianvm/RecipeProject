@@ -262,6 +262,7 @@ main,
   filter: drop-shadow(0 0 1px black);
 }
 
+#search_button:active svg path,
 #add_recipe_btn:active svg path {
   stroke: var(--turquoise);
 }
@@ -298,6 +299,42 @@ main,
   border-radius: 1rem;
   color: var(--black);
   background-color: var(--white);
+}
+
+#recipe_card_wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr 60%;
+  grid-template-areas: 
+    "name name name name"
+    "prep cook servings ingredients"
+    "prep-text prep-text prep-text ingredients";
+  
+    font-family: var(--font-family);
+}
+
+#recipe_card_name {
+  grid-area: name;
+}
+
+#recipe_card_prep_time {
+  grid-area: prep;
+}
+
+#recipe_card_cook_time {
+  grid-area: cook;
+}
+
+#recipe_card_servings {
+  grid-area: servings;
+}
+
+#prep_text {
+  grid-area: prep-text;
+}
+
+#ing_list {
+  grid-area: ingredients;
 }
 
 
