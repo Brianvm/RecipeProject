@@ -9,6 +9,10 @@
   margin: 0;
 }
 
+dialog {
+  padding: 0;
+}
+
 /* 3. Enable keyword animations */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -69,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   min-height: 100vh;
-  background: url("assets/jakob-owens-XKLZia7hPYI-unsplash.jpg")
+  background: url("assets/indexbg.jpg")
     center / cover no-repeat;
 }
 
@@ -317,44 +321,62 @@ main,
 
 #clicked_recipe_modal {
   height: fit-content;
-  max-height: 80vh;
+  max-height: 80dvh;
   position: relative;
+  background: url('assets/modalbg.jpg') center / cover no-repeat;
+
+  border: 2px solid var(--black);
+  border-radius: 1rem;
+
 }
 
 #recipe_card_wrapper {
+  height: auto;
+  min-height: 0;
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr 1fr 60%;
+  grid-template-rows: repeat(3, auto);
   grid-template-areas: 
     "name name name name"
     "extra extra extra ingredients"
     "prep-text prep-text prep-text ingredients";
   
   font-family: var(--font-family);
+  padding: 1rem;
 }
 
 #recipe_card_name {
   grid-area: name;
+  align-self: center;
 }
 
 #recipe_extra_info_wrapper {
   width: fit-content;
+
   grid-area: extra;
   display: flex;
   column-gap: 1.25rem;
-  padding: 0 0 0.5rem 0;
-  border-bottom: 0.1rem solid var(--black);
-  margin: 0 1rem 1rem 0;
+  align-items: center;
+
+  border-top: 0.1rem dotted var(--black);
+  border-bottom: 0.1rem dotted var(--black);
+  margin: 1rem 1rem 1rem 0;
+  padding: 0.5rem;
 }
 
 #prep_text {
   grid-area: prep-text;
 }
 
+#recipe_prep_text {
+  height: 100%;
+}
+
 #ing_list {
   grid-area: ingredients;
   padding: 0;
-  margin-left: 1rem;
+  margin-left: 3rem;
 }
 
 .recipe_extra_info,
@@ -364,12 +386,6 @@ main,
   overflow-wrap: anywhere;
   word-break: break-word;
   white-space: normal;
-}
-
-#ingredients_list,
-#recipe_prep_text {
-  max-height: 20rem;
-  overflow-y: auto;
 }
 
 .recipe_extra_info > span {
@@ -383,8 +399,8 @@ main,
 
 #close_btn {
   position: absolute;
-  top: 0.25rem;
-  right: 0.25rem;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 #close_btn,
