@@ -27,11 +27,13 @@ clickedRecipeModal.addEventListener('click', (e) => {
 
     const recipeId = card.dataset.id;
 
-    if (e.target.id === 'close_btn') {
+    const button = e.target.closest('button');
+
+    if (button?.id === 'close_btn') {
         clickedRecipeModal.close();
-    } else if (e.target.id === 'recipe_update_btn') {
+    } else if (button?.id === 'recipe_update_btn') {
         handleRecipeUpdate(recipeId);  
-    } else if (e.target.id === 'recipe_del_btn') {
+    } else if (button?.id === 'recipe_del_btn') {
         handleDelRecipe(recipeId);
     }
 })
@@ -118,10 +120,18 @@ function handleResultClick(e) {
     
     clickedRecipeModal.innerHTML = `
     <article id="recipe_card_wrapper" data-id="${selectedRecipe.id}">
-    <h2 id="recipe_card_name">${selectedRecipe['recipe-name']}</h2>
-    <h3 id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']}</span> min</h3>
-    <h3 id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']}</span> min</h3>
-    <h3 id="recipe_card_servings">Servings: <span class="recipe_card_num_value">${selectedRecipe['recipe-servings']}</span></h3>
+    <h2 id="recipe_card_name">${selectedRecipe['recipe-name']}<button type="button" id="recipe_update_btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+            <g id="Edit / Edit_Pencil_01">
+            <path id="Vector" d="M12 8.00012L4 16.0001V20.0001L8 20.0001L16 12.0001M12 8.00012L14.8686 5.13146L14.8704 5.12976C15.2652 4.73488 15.463 4.53709 15.691 4.46301C15.8919 4.39775 16.1082 4.39775 16.3091 4.46301C16.5369 4.53704 16.7345 4.7346 17.1288 5.12892L18.8686 6.86872C19.2646 7.26474 19.4627 7.46284 19.5369 7.69117C19.6022 7.89201 19.6021 8.10835 19.5369 8.3092C19.4628 8.53736 19.265 8.73516 18.8695 9.13061L18.8686 9.13146L16 12.0001M12 8.00012L16 12.0001" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            </svg>
+        </button></h2>
+    <section id="recipe_extra_info_wrapper">
+        <h3 class="recipe_extra_info" id="recipe_card_prep_time">Prep time: <span class="recipe_card_num_value">${selectedRecipe['recipe-prep-time']} min</span></h3>
+        <h3 class="recipe_extra_info" id="recipe_card_cook_time">Cook time: <span class="recipe_card_num_value">${selectedRecipe['recipe-cook-time']} min</span></h3>
+        <h3 class="recipe_extra_info" id="recipe_card_servings">Servings: <span class="recipe_card_num_value">${selectedRecipe['recipe-servings']}</span></h3>
+    </section>
     <section id="prep_text">
         <h3 class="recipe_card_subtitle">Preparation:</h3>
         <p id="recipe_prep_text">${selectedRecipe['recipe-preparation']}</p>
@@ -130,9 +140,12 @@ function handleResultClick(e) {
         <h3 class="recipe_card_subtitle">Ingredients:</h3>
         <ul id="ingredients_list">${ingredientItems}</ul>
     </section>
-    <button type="button" id="close_btn">X</button>
-    <button type="button" id="recipe_update_btn">Update</button>
-    <button type="button" id="recipe_del_btn">DELETE</button>
+    <button type="button" id="close_btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+        <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+    </button>
     </article>
     `
     clickedRecipeModal.showModal();
@@ -150,15 +163,4 @@ function handleResultClick(e) {
         addRecipeForm.dataset.editingId = recipeId;
         clickedRecipeModal.close();
         addRecipeModal.showModal();
-
-    }
-
-    /* RECIPE DEL FUNCTION */
-    function handleDelRecipe(recipeId) {
-        const delRecipeIndex = dataBase.findIndex(recipe => recipe.id === recipeId)
-        dataBase.splice(delRecipeIndex, 1);
-        localStorage.setItem('dataBase', JSON.stringify(dataBase));
-        const query = searchResultsContainer.dataset.activeQuery || '';
-        renderSearchResults(query);
-        clickedRecipeModal.close();
     }
