@@ -39,19 +39,28 @@
             <section class="hidden" id="search_results_container"></section>
             <dialog id="add_recipe_modal">
                 <form action="" id="add_recipe_form">
-                    <label for="recipe-name">Name:</label>
-                    <input type="text" name="recipe-name" id="recipe_name" required>
-                    <label for="recipe-prep-time">Prep Time:</label>
-                    <input type="text" name="recipe-prep-time" id="recipe_prep_time">
-                    <label for="recipe-cook-time">Cook Time:</label>
-                    <input type="text" name="recipe-cook-time" id="recipe_cook_time">
-                    <label for="recipe-servings">Servings:</label>
-                    <input type="text" name="recipe-servings" id="recipe_servings">
-                    <label for="recipe-preparation">Preparation</label>
+                    <fieldset id="name">
+                        <label for="recipe-name">Name:</label>
+                        <input type="text" name="recipe-name" id="recipe_name" required>
+                    </fieldset>
+                    <fieldset id="extra_info">
+                        <label for="recipe-prep-time">Prep Time:</label>
+                        <input type="text" name="recipe-prep-time" id="recipe_prep_time">
+                        <label for="recipe-cook-time">Cook Time:</label>
+                        <input type="text" name="recipe-cook-time" id="recipe_cook_time">
+                        <label for="recipe-servings">Servings:</label>
+                        <input type="text" name="recipe-servings" id="recipe_servings">
+                    </fieldset>
+                    <label for="recipe-preparation">Preparation:</label>
                     <textarea name="recipe-preparation" id="recipe_preparation" required></textarea>
-                    <label for="recipe-ingredients">Ingredients</label>
+                    <label for="recipe-ingredients">Ingredients:</label>
                     <textarea name="recipe-ingredients" id="recipe_ingredients" required></textarea>
-                    <button type="reset" id="add_recipe_modal_close_btn">X</button>
+                    <button type="reset" id="add_recipe_modal_close_btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                        <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
                     <button type="submit" id="add_recipe_modal_submit_btn">Save</button>
                 </form>
             </dialog>

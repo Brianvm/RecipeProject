@@ -119,7 +119,7 @@ function handleResultClick(e) {
     
     
     clickedRecipeModal.innerHTML = `
-    <article id="recipe_card_wrapper" data-id="${selectedRecipe.id}">
+    <article class="recipe_card_wrapper" id="recipe_card_wrapper" data-id="${selectedRecipe.id}">
     <h2 id="recipe_card_name">${selectedRecipe['recipe-name']}<button type="button" id="recipe_update_btn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
             <g id="Edit / Edit_Pencil_01">
