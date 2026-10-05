@@ -58,6 +58,10 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+fieldset {
+  padding: 0;
+}
+
 /* INDEX STYLING */
 
 :root {
@@ -430,11 +434,20 @@ main,
 
 /* ADD RECIPE MODAL */
 
+#add_recipe_form > * {
+  border: none;
+}
+
+#add_recipe_form {
+  min-width: 0;
+  align-items: start;
+  justify-content: start;
+}
+
 #name {
   grid-area: name;
-  /* align-self: center; */
 
-  width: 75%;
+  width: 65%;
   
   display: flex;
   align-items: center;
@@ -442,11 +455,49 @@ main,
 
 }
 
+#extra_info {
+  width: fit-content;
+  grid-area: extra;
+  display: flex;
+  column-gap: 1.25rem;
+  align-items: center;
+  align-self: start;
+  
+  border-top: 0.1rem dotted var(--black);
+  border-bottom: 0.1rem dotted var(--black);
+  margin: 1rem 1rem 1rem 0;
+  padding: 0.5rem;
+}
+
+#recipe_prep {
+  grid-area: prep-text;
+}
+
+#ingredients {
+  grid-area: ingredients;
+}
+
 #recipe_name {
   width: 100%;
 }
 
+.detail {
+  display: flex;
+  column-gap: 0.5rem;
+}
 
+.detail_label {
+  font-size: 0.85rem;
+}
+
+.detail_input {
+  width: 2rem;
+}
+
+#recipe_prep {
+  display: flex;
+  flex-direction: column;
+}
 
 /* UTILITY */
 
