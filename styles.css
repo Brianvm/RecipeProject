@@ -471,6 +471,7 @@ main,
 
 #recipe_prep {
   grid-area: prep-text;
+  width: 65%;
 }
 
 #ingredients {
@@ -494,9 +495,30 @@ main,
   width: 2rem;
 }
 
+#ingredients,
 #recipe_prep {
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+#recipe_ingredients {
+  height: 100%;
+}
+
+#recipe_prep {
+  width: 90%;
+}
+
+#recipe_preparation,
+#recipe_ingredients {
+  overflow-y: scroll;
+  resize: none;
+}
+
+#recipe_preparation {
+  height: 10rem;
+  width: 100%;
 }
 
 /* UTILITY */
