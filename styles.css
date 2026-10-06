@@ -70,8 +70,8 @@ fieldset {
   --content-width: min(75%, 42rem);
   --font-family: "Special Elite", system-ui;
   
-  --accent: turquoise;
-  --white: #fff;
+  --accent: hsl(174, 72%, 56%);
+  --white: hsl(0, 0%, 100%);
   --black: #000;
 }
 
@@ -217,10 +217,22 @@ main,
   color: var(--black);
 }
 
+#recipe_preparation,
+#recipe_ingredients,
+#recipe_servings,
+#recipe_cook_time,
+#recipe_prep_time,
+#recipe_name,
 #search_bar:focus {
   outline: none;
 }
 
+#recipe_preparation:focus-visible,
+#recipe_ingredients:focus-visible,
+#recipe_servings:focus-visible,
+#recipe_cook_time:focus-visible,
+#recipe_prep_time:focus-visible,
+#recipe_name:focus-visible,
 #search_bar:focus-visible {
   border-color: var(--accent);
 }
@@ -275,6 +287,7 @@ main,
   stroke: var(--white);
   filter: drop-shadow(0 0 1px black);
 }
+
 
 #add_recipe_modal_close_btn:hover svg path,
 #search_button:hover svg path,
@@ -485,6 +498,7 @@ main,
 .detail {
   display: flex;
   column-gap: 0.5rem;
+  align-items: center;
 }
 
 .detail_label {
@@ -519,6 +533,34 @@ main,
 #recipe_preparation {
   height: 10rem;
   width: 100%;
+}
+
+#add_recipe_modal_submit_btn {
+  width: 100%;
+
+  grid-column: 1 / -1;
+
+  margin-top: 1rem;
+  padding: 0.75rem;
+
+  background: none;
+  
+  box-shadow: 0 0 2px;
+}
+
+#add_recipe_modal_submit_btn:hover {
+  background-color: hsla(from var(--accent) h s l / 0.5);
+}
+
+#add_recipe_modal_submit_btn,
+#recipe_preparation,
+#recipe_ingredients,
+#recipe_servings,
+#recipe_cook_time,
+#recipe_prep_time,
+#recipe_name {
+  border: 1px solid var(--black);
+  border-radius: 5px;
 }
 
 /* UTILITY */
